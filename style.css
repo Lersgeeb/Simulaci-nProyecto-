@@ -203,8 +203,8 @@ option {
 }
 
 .instruction-ratio{
-    background-color: #fad400;
-    color: var(--dark-color);
+    background-color: var(--blue-complement);
+    color: var(--light-color);
     font-size: 1em;
     font-weight: bold;
 
