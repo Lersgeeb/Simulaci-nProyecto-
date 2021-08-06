@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="process-container-param">
+        
+        <div class="process" id="process-1">
+            <div class="white-space">
+                <div class="instruction-seg">
+                    <div class="instructions-left">32</div>     
+                    <div class="instruction-remove" onclick="removeProcess(1)">x</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="process" id="process-2">
+            <div class="white-space">
+                <div class="instruction-seg">
+                    <div class="instructions-left">22</div>     
+                    <div class="instruction-remove" onclick="removeProcess(2)">x</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="process" id="process-3">
+            <div class="white-space">
+                <div class="instruction-seg">
+                    <div class="instructions-left">23</div>     
+                    <div class="instruction-remove" onclick="removeProcess(3)">x</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="cpu-segment">
+        <img src="./Assets/cpu_icon.png" alt="">
+        <div class="state-cpu" id="state-image-comp">
+            <img src="./Assets/checked.png" alt="">
+        </div>
+    </div>
+
+
+
+</body>
+</html>
