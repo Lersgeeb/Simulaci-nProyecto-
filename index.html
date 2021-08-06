@@ -9,34 +9,69 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <div class="process-container-param">
-        
-        <div class="process">
-            <div class="white-space">
-                <div class="instruction-seg">
-                    <div class="instructions-left">32</div>     
-                    <div class="instruction-remove">x</div>
-                </div>
-            </div>
+    <div class="inputs-container">
+        <h1>Variables Simulación</h1>
+        <div class="inputs-yeah"><span>Capacidad Maxima</span><input type="text" class="parameter"></div>
+        <div class="inputs-yeah"><span>Velocidad por instruccion</span><input type="text" class="parameter"></div>
+        <div class="inputs-yeah"><span>Tiempo de intercambio</span><input type="text" class="parameter"></div>
+        <div class="inputs-yeah">
+            <span>Pol. Planificación</span><select name="" id="">
+                <option value="">FCFS</option>
+                <option value="">Round Robin</option>
+                <option value="">SPN</option>
+                <option value="">HRRN</option>
+            </select>
+
+        </div>
+        <div class="inputs-yeah"><span>Quantum</span><input type="text" class="parameter"></div>
+    </div>
+
+    <h1>Agregar Proceso</h1>
+    <div class="add-process-container">
+        <div class="add-process">
+            <label>Cantidad instrucciones</label><br>
+            <input type="text" class="parameter"> <br>
+            <button>Agregar</button>
         </div>
 
-        <div class="process">
-            <div class="white-space">
-                <div class="instruction-seg">
-                    <div class="instructions-left">22</div>     
-                    <div class="instruction-remove">x</div>
-                </div>
-            </div>
-        </div>
+        <div class="process-container-param">
 
-        <div class="process">
-            <div class="white-space">
-                <div class="instruction-seg">
-                    <div class="instructions-left">23</div>     
-                    <div class="instruction-remove">x</div>
+            <div class="process">
+                <div class="white-space">
+                    <div class="instruction-seg">
+                        <div class="instructions-left">32</div>
+                        <div class="instruction-remove">x</div>
+                    </div>
                 </div>
             </div>
+
+            <div class="process">
+                <div class="white-space">
+                    <div class="instruction-seg">
+                        <div class="instructions-left">22</div>
+                        <div class="instruction-remove">x</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process">
+                <div class="white-space">
+                    <div class="instruction-seg">
+                        <div class="instructions-left">23</div>
+                        <div class="instruction-remove">x</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+        <h1>Simulación visual</h1>
+        <div>
+            <button>Comenzar</button>
+            <span>Delay</span><input class="check-option" type="checkbox" name="Delay" id="" value="Delay">
+            <span>X2</span><input class="check-option" type="checkbox" name="" id="">
         </div>
 
     </div>
