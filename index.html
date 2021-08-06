@@ -35,34 +35,34 @@
         </div>
 
         <div class="process-container-param">
-
-            <div class="process">
+        
+            <div class="process" id="process-1">
                 <div class="white-space">
                     <div class="instruction-seg">
-                        <div class="instructions-left">32</div>
-                        <div class="instruction-remove">x</div>
+                        <div class="instructions-left">32</div>     
+                        <div class="instruction-remove" onclick="removeProcess(1)">x</div>
                     </div>
                 </div>
             </div>
-
-            <div class="process">
+    
+            <div class="process" id="process-2">
                 <div class="white-space">
                     <div class="instruction-seg">
-                        <div class="instructions-left">22</div>
-                        <div class="instruction-remove">x</div>
+                        <div class="instructions-left">22</div>     
+                        <div class="instruction-remove" onclick="removeProcess(2)">x</div>
                     </div>
                 </div>
             </div>
-
-            <div class="process">
+    
+            <div class="process" id="process-3">
                 <div class="white-space">
                     <div class="instruction-seg">
-                        <div class="instructions-left">23</div>
-                        <div class="instruction-remove">x</div>
+                        <div class="instructions-left">23</div>     
+                        <div class="instruction-remove" onclick="removeProcess(3)">x</div>
                     </div>
                 </div>
             </div>
-
+    
         </div>
     </div>
 
@@ -72,6 +72,19 @@
             <button>Comenzar</button>
             <span>Delay</span><input class="check-option" type="checkbox" name="Delay" id="" value="Delay">
             <span>X2</span><input class="check-option" type="checkbox" name="" id="">
+
+            <div class="visual-simulation">
+
+                <div class="cpu-segment">
+                    <img src="./Assets/cpu_icon.png" alt="">
+                    <div class="state-cpu" id="state-image-comp">
+                        <img src="./Assets/checked.png" alt="">
+                    </div>
+                </div>
+            
+            
+
+            </div>
         </div>
 
     </div>
