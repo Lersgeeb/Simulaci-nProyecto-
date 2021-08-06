@@ -13,3 +13,8 @@ function changeCpuIcon(iconName){
             break;
     }
 } 
+
+function removeProcess(processID){
+    processComp = document.getElementById(`process-${processID}`);
+    processComp.remove();
+}
