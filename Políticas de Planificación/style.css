@@ -35,7 +35,8 @@ option {
 
 .body-container{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    
 }
 
 .inputs-container {
@@ -82,7 +83,7 @@ option {
     box-sizing: border-box;
     padding: 1em;
     width: 250px;
-    height: 600px;
+    height: 500px;
     background-color: var(--blue-complement);
     display: flex;
     flex-direction: column-reverse;
@@ -152,8 +153,8 @@ option {
 .visual-simulation{
     
     display: flex;
-    width: 40%;
-    padding: 2em;
+    width: 750px;
+    padding: 2em 0em;
     justify-content: space-between;
 }
 
