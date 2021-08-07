@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +9,11 @@
     <script src="script.js"></script>
     <title>Document</title>
 </head>
+
 <body>
 
     <div class="body-container">
-        
+
         <div>
             <div class="inputs-container">
                 <h1>Variables Simulación</h1>
@@ -25,10 +27,10 @@
                         <option value="">SPN</option>
                         <option value="">HRRN</option>
                     </select>
-        
+
                 </div>
                 <div class="inputs-yeah" id="inputSimQuantum"><span>Quantum</span><input type="text" class="parameter"></div>
-            </div>        
+            </div>
 
             <h1>Agregar Proceso</h1>
             <div class="add-process-container">
@@ -36,74 +38,78 @@
                     <label>Cantidad instrucciones</label><br>
                     <input type="number" class="parameter" id="add-process-input"> <br>
                     <button onclick="addInstruction()">Agregar</button>
+                    <button onclick="addInstruction()">Agregar Procesos Aleatorios</button>
                 </div>
 
                 <div class="process-container-param" id="processParamsVisual">
-            
+
                 </div>
-            </div>    
+            </div>
         </div>
 
         <div>
             <h1>Simulación visual</h1>
             <div>
                 <button>Comenzar</button>
-                <span>Delay</span><input class="check-option" type="checkbox" name="Delay" id="" value="Delay">
-                <span>X2</span><input class="check-option" type="checkbox" name="" id="">
+                <span>Velocidad </span><select name="" id="">                    
+                    <option value="">Tiempo Real</option>
+                    <option value="">Acelerado</option>
+                    <option value="">Sin delay</option>
+                </select>
 
                 <div class="visual-simulation">
 
 
                     <div class="process-container-param">
-            
+
                         <div class="process" id="process-sim-1">
                             <div class="white-space">
                                 <div class="instruction-seg">
-                                    <div class="instructions-left">32</div>     
+                                    <div class="instructions-left">32</div>
                                     <div class="instruction-ratio">1.5</div>
                                 </div>
                             </div>
                         </div>
-                
+
                         <div class="process" id="process-sim-2">
                             <div class="white-space">
                                 <div class="instruction-seg">
-                                    <div class="instructions-left">22</div>     
+                                    <div class="instructions-left">22</div>
                                     <div class="instruction-ratio">0.5</div>
                                 </div>
                             </div>
                         </div>
-                
+
                         <div class="process" id="process-sim-3">
                             <div class="white-space">
                                 <div class="instruction-seg">
-                                    <div class="instructions-left">23</div>     
+                                    <div class="instructions-left">23</div>
                                     <div class="instruction-ratio">0.6</div>
                                 </div>
                             </div>
                         </div>
-                
+
                     </div>
                     <div class="arrow-segment">
                         <img src="./Assets/arrow.png" alt="">
                     </div>
 
                     <div class="cpu-and-process-segment">
-                        <div class="cpu-segment">                   
+                        <div class="cpu-segment">
                             <img src="./Assets/cpu_icon.png" alt="">
                             <div class="state-cpu" id="state-image-comp">
                                 <img src="./Assets/checked.png" alt="">
                             </div>
                         </div>
-        
+
                         <div class="current-process">
-                            <div class="process-container-param" >
-            
+                            <div class="process-container-param">
+
                                 <div class="process" id="process-sim-1">
                                     <div class="white-space">
                                         <div class="instruction-seg">
-                                            <div class="instructions-left">32</div>     
-                
+                                            <div class="instructions-left">32</div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -119,4 +125,5 @@
 
 
 </body>
+
 </html>

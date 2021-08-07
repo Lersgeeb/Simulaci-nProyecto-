@@ -1,11 +1,10 @@
-
-:root{
+:root {
     --bg-color: #302B63;
     --blue-complement: #6475AB;
     --dark-color: #3E3E3E;
     --light-color: #ffffff;
     --incentive-color: #E85454;
-    --secondary-text: #878787; 
+    --secondary-text: #878787;
 }
 
 body,
@@ -13,7 +12,6 @@ body,
     font-family: 'Roboto', sans-serif;
     background-color: var(--bg-color);
     color: var(--light-color);
-
 }
 
 button {
@@ -33,24 +31,23 @@ option {
     color: black;
 }
 
-.body-container{
+select {
+    background-color: white;
+    color: black;
+    border: none;
+    width: 11rem;
+    height: 2rem;
+}
+
+.body-container {
     display: flex;
     justify-content: space-around;
-    
 }
 
 .inputs-container {
     display: flex;
     flex-direction: column;
     width: 25rem;
-}
-
-.inputs-container select {
-    background-color: white;
-    color: black;
-    border: none;
-    width: 11rem;
-    height: 2rem;
 }
 
 .parameter {
@@ -79,7 +76,7 @@ option {
 
 /*-----------Process segment----------*/
 
-.process-container-param{
+.process-container-param {
     box-sizing: border-box;
     padding: 1em;
     width: 250px;
@@ -90,7 +87,7 @@ option {
     align-items: center;
 }
 
-.process{
+.process {
     margin-top: 10px;
     position: relative;
     width: 220px;
@@ -102,128 +99,118 @@ option {
     align-items: center;
 }
 
-.white-space{
-    width:185px;
+.white-space {
+    width: 185px;
     height: 15px;
     background-color: var(--light-color);
     text-align: center;
     border-radius: 10px;
 }
 
-.instructions-left{
+.instructions-left {
     background-color: var(--dark-color);
     color: var(--light-color);
     font-size: 0.7em;
-
     display: flex;
     justify-content: center;
     align-items: center;
     width: 15px;
     height: 15px;
-    
     position: absolute;
     padding: 8px;
     border-radius: 100%;
-    left:43%;
-    top:5px;
-    
+    left: 43%;
+    top: 5px;
 }
-.instruction-remove{
-    cursor: pointer;
 
+.instruction-remove {
+    cursor: pointer;
     background-color: var(--incentive-color);
     color: var(--light-color);
     font-size: 1em;
     font-weight: bold;
-
     display: flex;
     justify-content: center;
     align-items: center;
     width: 25px;
     height: 25px;
-    
     position: absolute;
     padding: 8px;
     border-radius: 100%;
-    left:110%;
-    top:3px;
+    left: 110%;
+    top: 3px;
 }
 
+
 /*cpu simulation*/
-.visual-simulation{
-    
+
+.visual-simulation {
     display: flex;
     width: 750px;
     padding: 2em 0em;
     justify-content: space-between;
 }
 
-.current-process .process-container-param{
+.current-process .process-container-param {
     box-sizing: content-box;
     padding: 0;
     height: 80px;
     flex-direction: row;
-    
     align-items: center;
     justify-content: center;
 }
-.current-process .process-container-param .process{
-   margin-bottom: 9px;
+
+.current-process .process-container-param .process {
+    margin-bottom: 9px;
 }
 
-.arrow-segment{
+.arrow-segment {
     display: flex;
     align-items: flex-end;
     padding-bottom: 1.3em;
 }
 
-.cpu-segment{
+.cpu-segment {
     display: flex;
     justify-content: center;
-    
     position: relative;
     background-color: var(--bg-color);
-
     margin-bottom: 3em;
 }
 
-.state-cpu{
+.state-cpu {
     background-color: var(--bg-color);
-    width:  80px;
-    height:  80px;
+    width: 80px;
+    height: 80px;
     border-radius: 100%;
-
     z-index: 1;
     position: absolute;
-    top:32%;
+    top: 32%;
     left: 85px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.cpu-and-process-segment{
+.cpu-and-process-segment {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    
 }
 
-.instruction-ratio{
+.instruction-ratio {
     background-color: var(--blue-complement);
     color: var(--light-color);
     font-size: 1em;
     font-weight: bold;
-
     display: flex;
     justify-content: center;
     align-items: center;
     width: 25px;
     height: 25px;
-    
     position: absolute;
     padding: 8px;
     border-radius: 100%;
-    left:110%;
-    top:3px;
+    left: 110%;
+    top: 3px;
 }
