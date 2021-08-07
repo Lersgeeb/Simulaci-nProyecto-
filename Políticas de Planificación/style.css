@@ -13,6 +13,7 @@ body,
     font-family: 'Roboto', sans-serif;
     background-color: var(--bg-color);
     color: var(--light-color);
+
 }
 
 button {
@@ -30,6 +31,11 @@ button:hover {
 option {
     background-color: var(--light-color);
     color: black;
+}
+
+.body-container{
+    display: flex;
+    justify-content: space-between;
 }
 
 .inputs-container {
