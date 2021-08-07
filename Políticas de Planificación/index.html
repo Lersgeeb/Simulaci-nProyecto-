@@ -17,19 +17,19 @@
         <div>
             <div class="inputs-container">
                 <h1>Variables Simulación</h1>
-                <div class="inputs-yeah" id="inputSimCapacidad"><span>Capacidad Maxima</span><input type="text" class="parameter"></div>
-                <div class="inputs-yeah" id="inputSimInstruccion"><span>Velocidad por instruccion</span><input type="text" class="parameter"></div>
-                <div class="inputs-yeah" id="inputSimIntercambio"><span>Tiempo de intercambio</span><input type="text" class="parameter"></div>
-                <div class="inputs-yeah" id="inputSimPolitica">
-                    <span>Pol. Planificación</span><select name="" id="">
-                        <option value="">FCFS</option>
-                        <option value="">Round Robin</option>
-                        <option value="">SPN</option>
-                        <option value="">HRRN</option>
+                <div class="inputs-yeah" ><span>Capacidad Maxima</span><input type="text" class="parameter" value="9" id="inputSimCapacidad"></div>
+                <div class="inputs-yeah" ><span>Tiempo por instruccion</span><input type="text" class="parameter" value="0.1" id="inputSimInstruccion"></div>
+                <div class="inputs-yeah" ><span>Tiempo de intercambio</span><input type="text" class="parameter" value="1" id="inputSimIntercambio"></div>
+                <div class="inputs-yeah" >
+                    <span>Pol. Planificación</span><select name="" id="inputSimPolitica">
+                        <option value="FCFS">FCFS</option>
+                        <option value="Round">Round Robin</option>
+                        <option value="SPN">SPN</option>
+                        <option value="HRRN">HRRN</option>
                     </select>
 
                 </div>
-                <div class="inputs-yeah" id="inputSimQuantum"><span>Quantum</span><input type="text" class="parameter"></div>
+                <div class="inputs-yeah" ><span>Quantum</span><input type="text" class="parameter" id="inputSimQuantum" value="4"></div>
             </div>
 
             <h1>Agregar Proceso</h1>
@@ -50,7 +50,7 @@
         <div>
             <h1>Simulación visual</h1>
             <div>
-                <button>Comenzar</button>
+                <button onclick="startSimulation()">Comenzar</button>
                 <span>Velocidad </span><select name="" id="">                    
                     <option value="">Tiempo Real</option>
                     <option value="">Acelerado</option>
@@ -60,34 +60,9 @@
                 <div class="visual-simulation">
 
 
-                    <div class="process-container-param">
+                    <div class="process-container-param" id="process-container-sim">
 
-                        <div class="process" id="process-sim-1">
-                            <div class="white-space">
-                                <div class="instruction-seg">
-                                    <div class="instructions-left">32</div>
-                                    <div class="instruction-ratio">1.5</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="process" id="process-sim-2">
-                            <div class="white-space">
-                                <div class="instruction-seg">
-                                    <div class="instructions-left">22</div>
-                                    <div class="instruction-ratio">0.5</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="process" id="process-sim-3">
-                            <div class="white-space">
-                                <div class="instruction-seg">
-                                    <div class="instructions-left">23</div>
-                                    <div class="instruction-ratio">0.6</div>
-                                </div>
-                            </div>
-                        </div>
+                
 
                     </div>
                     <div class="arrow-segment">
@@ -98,21 +73,14 @@
                         <div class="cpu-segment">
                             <img src="./Assets/cpu_icon.png" alt="">
                             <div class="state-cpu" id="state-image-comp">
-                                <img src="./Assets/checked.png" alt="">
+                                
                             </div>
                         </div>
 
                         <div class="current-process">
-                            <div class="process-container-param">
+                            <div class="process-container-param" id="current-process-container">
 
-                                <div class="process" id="process-sim-1">
-                                    <div class="white-space">
-                                        <div class="instruction-seg">
-                                            <div class="instructions-left">32</div>
-
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

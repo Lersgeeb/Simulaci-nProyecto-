@@ -146,7 +146,7 @@ select {
 
 .visual-simulation {
     display: flex;
-    width: 750px;
+    width: 720px;
     padding: 2em 0em;
     justify-content: space-between;
 }

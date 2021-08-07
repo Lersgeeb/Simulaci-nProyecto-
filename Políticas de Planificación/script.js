@@ -1,7 +1,13 @@
+var simProcessList = [];
 var variableSim = {};
 var setID = 1;
 var processes = [];
-
+var currentProcess = {};
+var stateSim = 'Ready';
+var timeSimulationValues = {
+    'instruction': 150,
+    'change': 1200
+};
 
 // Variables simulacion
 function getParameters(){
@@ -12,13 +18,14 @@ function getParameters(){
     inputSimPolitica = document.getElementById('inputSimPolitica').value;
     inputSimQuantum = document.getElementById('inputSimQuantum').value;
       
-    variablesSim = {
-        'capacidad':inputSimCapacidad,
-        'velocidad':inputSimInstruccion,
-        'tiempoIntercambio':inputSimIntercambio,
-        'politica':inputSimPolitica,
-        'quantum':inputSimQuantum
+    variableSim = {
+        'capacidad': parseInt(inputSimCapacidad),
+        'velocidad': parseFloat(inputSimInstruccion),
+        'tiempoIntercambio': parseFloat(inputSimIntercambio),
+        'politica': inputSimPolitica,
+        'quantum': parseInt(inputSimQuantum)
     }
+
 }
 
 
@@ -39,7 +46,8 @@ function addInstruction(){
 function createProcess(value){
     return {
         id:setID++,
-        instructions:value
+        instructions:value,
+        valuePolite:0
     };
 }
 
@@ -68,18 +76,136 @@ function renderProcessParam(){
 }
 
 //Simulación visual
+
+async function startSimulation(){
+    simProcessList = processes;
+    getParameters();
+    calculateValues();
+    setCurrentProcess();
+    renderVisualSimul();
+    setStateSim('Wait');
+
+    while(stateSim != 'Ready'){
+        if(stateSim == 'Wait'){
+            await executeProcess()   
+        }
+        if(stateSim == 'Change'){
+            setCurrentProcess();
+            await sleep(timeSimulationValues.change);
+            setStateSim('Wait');
+            renderVisualSimul();
+        }
+    } 
+}
+
+
+async function executeProcess(){
+    if(currentProcess.instructions > 0){
+        currentProcess.instructions -= 1;
+        renderVisualSimul();
+        await sleep(timeSimulationValues.instruction);
+    }
+    else{
+        if(simProcessList.length > 0){
+            setStateSim('Change');
+            renderVisualSimul();
+        }
+        else{
+            setStateSim('Ready');
+            renderVisualSimul();
+        }
+    }
+}
+
+
+function calculateValues(){
+    
+    switch (variableSim.politica){
+        case 'FCFS':
+            calculateFCFS();
+            break;
+
+        case 'Round': 
+            break;
+
+        case 'SPN':
+            break;
+
+        case 'HRRN':
+            break;
+    }
+}
+
+function calculateFCFS(){
+    simProcessList.map( (process, index) => {
+        process.valuePolite = index + 1
+    })
+}
+
+function renderVisualSimul(){
+    renderProcessQueue();
+    renderCurrentProcess();
+}
+
+function renderProcessQueue(){
+    processContainerSim = document.getElementById('process-container-sim');
+    processContainerSim.innerHTML = " ";
+    simProcessList.map( process => {
+
+        processContainerSim.innerHTML += `
+            <div class="process" id="process-sim-${process.id}">
+                <div class="white-space">
+                    <div class="instruction-seg">
+                        <div class="instructions-left">${process.instructions}</div>
+                        <div class="instruction-ratio">${process.valuePolite}</div>
+                    </div>
+                </div>
+            </div>    
+        `
+    });
+}
+
+function renderCurrentProcess(){
+    currentProcessContainer = document.getElementById('current-process-container');
+    currentProcessContainer.innerHTML = `
+        <div class="process" id="process-sim-${currentProcess.id}">
+            <div class="white-space">
+                <div class="instruction-seg">
+                    <div class="instructions-left">${currentProcess.instructions}</div>
+                </div>
+            </div>
+        </div>
+    `
+}
+
+function setCurrentProcess(){
+    currentProcess = simProcessList.shift();
+}
+
+//State 
+
+function setStateSim(state){
+    stateSim = state;
+    changeCpuIcon(state);
+}
+
 function changeCpuIcon(iconName){
     imageComp = document.getElementById('state-image-comp');
     
     switch (iconName){
-        case 'ready':
+        case 'Ready':
             imageComp.innerHTML = '<img src="./Assets/checked.png" alt="">'
             break;
-        case 'wait':
+        case 'Wait':
             imageComp.innerHTML = '<img src="./Assets/wait.png" alt="">'
             break;
-        case 'change':
+        case 'Change':
             imageComp.innerHTML = '<img src="./Assets/change.png" alt="">'
             break;
     }
 } 
+
+//Extra simulation
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
