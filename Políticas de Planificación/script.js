@@ -8,6 +8,7 @@ var timeSimulationValues = {
     'instruction': 150,
     'change': 1200
 };
+var realTimeExecution = 0
 
 // Variables simulacion
 function getParameters(){
@@ -78,19 +79,23 @@ function renderProcessParam(){
 //Simulación visual
 
 async function startSimulation(){
-    simProcessList = processes;
+    simProcessList = JSON.parse(JSON.stringify(processes));
     getParameters();
     calculateValues();
     setCurrentProcess();
+    calculateValues();
     renderVisualSimul();
     setStateSim('Wait');
-
+    
     while(stateSim != 'Ready'){
+        
         if(stateSim == 'Wait'){
             await executeProcess()   
         }
         if(stateSim == 'Change'){
             setCurrentProcess();
+            calculateValues();
+            realTimeExecution += variableSim.tiempoIntercambio;
             await sleep(timeSimulationValues.change);
             setStateSim('Wait');
             renderVisualSimul();
@@ -103,6 +108,7 @@ async function executeProcess(){
     if(currentProcess.instructions > 0){
         currentProcess.instructions -= 1;
         renderVisualSimul();
+        realTimeExecution += variableSim.velocidad;
         await sleep(timeSimulationValues.instruction);
     }
     else{
@@ -111,8 +117,11 @@ async function executeProcess(){
             renderVisualSimul();
         }
         else{
+            setCurrentProcess();
             setStateSim('Ready');
             renderVisualSimul();
+            renderResults();
+            realTimeExecution = 0;
         }
     }
 }
@@ -126,6 +135,7 @@ function calculateValues(){
             break;
 
         case 'Round': 
+            calculateRR();
             break;
 
         case 'SPN':
@@ -167,13 +177,29 @@ function renderProcessQueue(){
 
 function renderCurrentProcess(){
     currentProcessContainer = document.getElementById('current-process-container');
-    currentProcessContainer.innerHTML = `
-        <div class="process" id="process-sim-${currentProcess.id}">
-            <div class="white-space">
-                <div class="instruction-seg">
-                    <div class="instructions-left">${currentProcess.instructions}</div>
+    if(currentProcess){
+        currentProcessContainer.innerHTML = `
+            <div class="process" id="process-sim-${currentProcess.id}">
+                <div class="white-space">
+                    <div class="instruction-seg">
+                        <div class="instructions-left">${currentProcess.instructions}</div>
+                    </div>
                 </div>
             </div>
+        `
+    }
+    else{
+        currentProcessContainer.innerHTML = " "
+    }
+   
+}
+
+function renderResults(){
+    resultSegment = document.getElementById('resultSegment');
+    resultSegment.innerHTML = `
+        <h1>Resultados</h1>
+        <div class="executionDiv">
+            <h3>El tiempo total real de ejecución fue de: ${realTimeExecution.toFixed(2)} segundos</h3>
         </div>
     `
 }
