@@ -85,11 +85,11 @@ async function startSimulation(){
     setCurrentProcess();
     calculateValues();
     renderVisualSimul();
-    setStateSim('Wait');
+    setStateSim('Execution');
     
     while(stateSim != 'Ready'){
 
-        if(stateSim == 'Wait'){
+        if(stateSim == 'Execution'){
 
             switch (variableSim.politica){
                 case 'FCFS':
@@ -101,6 +101,7 @@ async function startSimulation(){
                     break;
         
                 case 'SPN':
+                    await runningExecution(); 
                     break;
         
                 case 'HRRN':
@@ -156,7 +157,7 @@ async function ProcessChange(){
     calculateValues();
     realTimeExecution += variableSim.tiempoIntercambio;
     await sleep(timeSimulationValues.change);
-    setStateSim('Wait');
+    setStateSim('Execution');
 }
 
 
@@ -173,6 +174,7 @@ function calculateValues(){
             break;
 
         case 'SPN':
+            calculateSPN();
             break;
 
         case 'HRRN':
@@ -187,6 +189,13 @@ function calculateFCFS(){
 }
 
 function calculateRR(){
+    simProcessList.map( (process, index) => {
+        process.valuePolite = index + 1
+    })
+}
+
+function calculateSPN(){
+    simProcessList.sort((a, b) => parseInt(a.instructions) - parseInt(b.instructions));
     simProcessList.map( (process, index) => {
         process.valuePolite = index + 1
     })
@@ -264,7 +273,7 @@ function changeCpuIcon(){
         case 'Ready':
             imageComp.innerHTML = '<img src="./Assets/checked.png" alt="">'
             break;
-        case 'Wait':
+        case 'Execution':
             imageComp.innerHTML = '<img src="./Assets/wait.png" alt="">'
             break;
         case 'Change':
