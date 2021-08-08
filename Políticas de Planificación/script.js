@@ -9,6 +9,7 @@ var timeSimulationValues = {
     'change': 1200
 };
 var realTimeExecution = 0
+var timeQuamtumCounter = 0;
 
 // Variables simulacion
 function getParameters(){
@@ -105,10 +106,23 @@ async function startSimulation(){
 
 
 async function executeProcess(){
-    if(currentProcess.instructions > 0){
+    console.log(timeQuamtumCounter);
+    if(
+        (variableSim.politica  == 'Round Robin' )&& 
+        (timeQuamtumCounter >= variableSim.quantum)
+    ){
+        console.log('sasa')
+        if(timeQuamtumCounter >= variableSim.quantum){
+            setStateSim('Change');
+            simProcessList.push(currentProcess);
+            
+        }
+    }
+    else if(currentProcess.instructions > 0){
         currentProcess.instructions -= 1;
         renderVisualSimul();
         realTimeExecution += variableSim.velocidad;
+        timeQuamtumCounter += variableSim.velocidad;
         await sleep(timeSimulationValues.instruction);
     }
     else{
@@ -118,10 +132,9 @@ async function executeProcess(){
         }
         else{
             setCurrentProcess();
+            renderResults();
             setStateSim('Ready');
             renderVisualSimul();
-            renderResults();
-            realTimeExecution = 0;
         }
     }
 }
@@ -134,7 +147,7 @@ function calculateValues(){
             calculateFCFS();
             break;
 
-        case 'Round': 
+        case 'Round Robin': 
             calculateRR();
             break;
 
@@ -147,6 +160,12 @@ function calculateValues(){
 }
 
 function calculateFCFS(){
+    simProcessList.map( (process, index) => {
+        process.valuePolite = index + 1
+    })
+}
+
+function calculateRR(){
     simProcessList.map( (process, index) => {
         process.valuePolite = index + 1
     })
@@ -212,13 +231,14 @@ function setCurrentProcess(){
 
 function setStateSim(state){
     stateSim = state;
-    changeCpuIcon(state);
+    changeTime();
+    changeCpuIcon();
 }
 
-function changeCpuIcon(iconName){
+function changeCpuIcon(){
     imageComp = document.getElementById('state-image-comp');
     
-    switch (iconName){
+    switch (stateSim){
         case 'Ready':
             imageComp.innerHTML = '<img src="./Assets/checked.png" alt="">'
             break;
@@ -230,6 +250,19 @@ function changeCpuIcon(iconName){
             break;
     }
 } 
+
+function changeTime(){
+    switch (stateSim){
+        case 'Ready':
+            realTimeExecution = 0
+            timeQuamtumCounter = 0;
+            break;
+        case 'Change':
+            timeQuamtumCounter = 0;
+            break;
+    }
+} 
+
 
 //Extra simulation
 function sleep(ms) {
