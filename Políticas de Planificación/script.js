@@ -49,7 +49,8 @@ function createProcess(value){
     return {
         id:setID++,
         instructions:value,
-        valuePolite:0
+        valuePolite:0,
+        waitingTime:0
     };
 }
 
@@ -105,7 +106,7 @@ async function startSimulation(){
                     break;
         
                 case 'HRRN':
-                    break;
+                    await runningExecutionHRRN();
             }
               
 
@@ -144,6 +145,11 @@ async function runningExecutionRR(){
     }    
 }
 
+async function runningExecutionHRRN(){
+    await runningExecution();
+    calculateHRRN();
+}
+
 async function executeInstructions(){
     currentProcess.instructions -= 1;
     realTimeExecution += variableSim.velocidad;
@@ -178,6 +184,7 @@ function calculateValues(){
             break;
 
         case 'HRRN':
+            calculateHRRN();
             break;
     }
 }
@@ -201,6 +208,20 @@ function calculateSPN(){
     })
 }
 
+function calculateHRRN(){
+    simProcessList.map( (process) => {
+        s =  variableSim.velocidad * process.instructions;
+        process.valuePolite = ((realTimeExecution + s) / s).toFixed(2);
+    });
+    simProcessList.sort((a, b) => parseFloat(b.valuePolite) - parseFloat(a.valuePolite));
+}
+
+function setCurrentProcess(){
+    currentProcess = simProcessList.shift();
+}
+
+
+//Render
 function renderVisualSimul(){
     renderProcessQueue();
     renderCurrentProcess();
@@ -251,10 +272,6 @@ function renderResults(){
             <h3>El tiempo total real de ejecución fue de: ${realTimeExecution.toFixed(2)} segundos</h3>
         </div>
     `
-}
-
-function setCurrentProcess(){
-    currentProcess = simProcessList.shift();
 }
 
 //State 
