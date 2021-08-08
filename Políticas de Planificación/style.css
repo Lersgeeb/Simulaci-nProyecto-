@@ -160,7 +160,7 @@ select {
 
 .visual-simulation {
     display: flex;
-    width: 720px;
+    width: 650px;
     padding: 2em 0em;
     justify-content: space-between;
 }
