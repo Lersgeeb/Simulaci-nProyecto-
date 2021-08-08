@@ -77,8 +77,7 @@ function renderProcessParam(){
     });
 }
 
-//Simulación visual
-
+//Simulación
 async function startSimulation(){
     simProcessList = JSON.parse(JSON.stringify(processes));
     getParameters();
@@ -89,57 +88,79 @@ async function startSimulation(){
     setStateSim('Wait');
     
     while(stateSim != 'Ready'){
-        
+
         if(stateSim == 'Wait'){
-            await executeProcess()   
+
+            switch (variableSim.politica){
+                case 'FCFS':
+                    await runningExecution(); 
+                    break;
+        
+                case 'Round Robin': 
+                    await runningExecutionRR();
+                    break;
+        
+                case 'SPN':
+                    break;
+        
+                case 'HRRN':
+                    break;
+            }
+              
+
         }
         if(stateSim == 'Change'){
-            setCurrentProcess();
-            calculateValues();
-            realTimeExecution += variableSim.tiempoIntercambio;
-            await sleep(timeSimulationValues.change);
-            setStateSim('Wait');
-            renderVisualSimul();
+            await ProcessChange();
         }
     } 
 }
 
-
-async function executeProcess(){
-    console.log(timeQuamtumCounter);
-    if(
-        (variableSim.politica  == 'Round Robin' )&& 
-        (timeQuamtumCounter >= variableSim.quantum)
-    ){
-        console.log('sasa')
-        if(timeQuamtumCounter >= variableSim.quantum){
-            setStateSim('Change');
-            simProcessList.push(currentProcess);
-            
-        }
-    }
-    else if(currentProcess.instructions > 0){
-        currentProcess.instructions -= 1;
-        renderVisualSimul();
-        realTimeExecution += variableSim.velocidad;
-        timeQuamtumCounter += variableSim.velocidad;
-        await sleep(timeSimulationValues.instruction);
+async function runningExecution(){
+    if(currentProcess.instructions > 0){
+        await executeInstructions();
     }
     else{
         if(simProcessList.length > 0){
-            setStateSim('Change');
-            renderVisualSimul();
+            setStateSim('Change');        
         }
         else{
-            setCurrentProcess();
             renderResults();
+            setCurrentProcess();
             setStateSim('Ready');
-            renderVisualSimul();
         }
     }
 }
 
+async function runningExecutionRR(){
+    if( timeQuamtumCounter >= variableSim.quantum && currentProcess.instructions != 0){
+        if(timeQuamtumCounter >= variableSim.quantum){
+            setStateSim('Change');
+            simProcessList.push(currentProcess);
+        }
+    }
+    else{
+        await runningExecution();
+    }    
+}
 
+async function executeInstructions(){
+    currentProcess.instructions -= 1;
+    realTimeExecution += variableSim.velocidad;
+    timeQuamtumCounter += variableSim.velocidad;
+    renderVisualSimul();
+    await sleep(timeSimulationValues.instruction);
+}
+
+async function ProcessChange(){
+    setCurrentProcess();
+    calculateValues();
+    realTimeExecution += variableSim.tiempoIntercambio;
+    await sleep(timeSimulationValues.change);
+    setStateSim('Wait');
+}
+
+
+// Manipulación de valores para la simulación
 function calculateValues(){
     
     switch (variableSim.politica){
@@ -233,6 +254,7 @@ function setStateSim(state){
     stateSim = state;
     changeTime();
     changeCpuIcon();
+    renderVisualSimul();
 }
 
 function changeCpuIcon(){
