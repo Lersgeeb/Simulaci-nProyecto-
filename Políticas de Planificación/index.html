@@ -17,8 +17,8 @@
             <div class="inputs-container">
                 <h1>Variables Simulación</h1>
                 <div class="inputs-yeah" ><span>Capacidad Maxima</span><input type="text" class="parameter" value="9" id="inputSimCapacidad"></div>
-                <div class="inputs-yeah" ><span>Tiempo por instruccion</span><input type="text" class="parameter" value="0.1" id="inputSimInstruccion" onchange="setTimeSimulation()"></div>
-                <div class="inputs-yeah" ><span>Tiempo de intercambio</span><input type="text" class="parameter" value="1" id="inputSimIntercambio" onchange="setTimeSimulation()"></div>
+                <div class="inputs-yeah" ><span>Tiempo por instruccion (Seg)</span><input type="text" class="parameter" value="0.1" id="inputSimInstruccion" onchange="setTimeSimulation()"></div>
+                <div class="inputs-yeah" ><span>Tiempo de intercambio (Seg)</span><input type="text" class="parameter" value="1" id="inputSimIntercambio" onchange="setTimeSimulation()"></div>
                 <div class="inputs-yeah" >
                     <span>Pol. Planificación</span><select name="" id="inputSimPolitica">
                         <option value="FCFS">FCFS</option>
@@ -28,7 +28,7 @@
                     </select>
 
                 </div>
-                <div class="inputs-yeah" ><span>Quantum</span><input type="text" class="parameter" id="inputSimQuantum" value="4"></div>
+                <div class="inputs-yeah" ><span>Quantum (Seg)</span><input type="text" class="parameter" id="inputSimQuantum" value="4"></div>
             </div>
 
             <h1>Agregar Proceso</h1>
@@ -37,7 +37,7 @@
                     <label>Cantidad instrucciones</label><br>
                     <input type="number" class="parameter" id="add-process-input"> <br>
                     <button class="mgt" onclick="addInstruction()">Agregar</button>
-                    <button class="mgt" onclick="addInstruction()">Agregar Procesos Aleatorios</button>
+                    <button class="mgt" onclick="addRandomProcesses()">Agregar Procesos Aleatorios</button>
                     <button class="mgt" onclick="removeProcesses()">Limpiar Procesos</button>
                 </div>
 

@@ -4,10 +4,7 @@ var setID = 1;
 var processes = [];
 var currentProcess = {};
 var stateSim = 'Ready';
-var timeSimulationValues = {
-    'instruction': 150,
-    'change': 1200
-};
+var timeSimulationValues = {};
 var realTimeExecution = 0
 var timeQuamtumCounter = 0;
 
@@ -37,7 +34,7 @@ function setTimeSimulation(){
     switch(timeExeSimulation){
         case 'Acelerado':
             timeSimulationValues = {
-                'instruction': 150,
+                'instruction': 100,
                 'change': 1200
             };
             break;
@@ -59,9 +56,10 @@ function setTimeSimulation(){
 
 // Agregar Proceso
 function addInstruction(){
+    getParameters()
     addProcessInput = document.getElementById('add-process-input');
     value = parseInt(addProcessInput.value);
-    if(value>0){
+    if(value>0 && processes.length<variableSim.capacidad){
         process = createProcess(value);
         processes.push(process);
 
@@ -69,6 +67,17 @@ function addInstruction(){
         addProcessInput.value = '';
     }
 }
+
+function addRandomProcesses(){
+    getParameters()
+    for (i=processes.length; i<variableSim.capacidad; i++){
+        process = createProcess(getRandomInt(0,111));
+        processes.push(process);
+    }
+    
+    renderProcessParam();
+}
+
 
 function createProcess(value){
     return {
@@ -111,7 +120,7 @@ function renderProcessParam(){
 //Simulación
 async function startSimulation(){
     simProcessList = JSON.parse(JSON.stringify(processes));
-    getParameters();
+    setTimeSimulation();
     calculateValues();
     setCurrentProcess();
     calculateValues();
@@ -348,3 +357,9 @@ function changeTime(){
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); 
+  }
