@@ -30,7 +30,32 @@ function getParameters(){
 
 }
 
+function setTimeSimulation(){
+    getParameters();
+    timeExeSimulation = document.getElementById('timeExeSimulation').value;
 
+    switch(timeExeSimulation){
+        case 'Acelerado':
+            timeSimulationValues = {
+                'instruction': 150,
+                'change': 1200
+            };
+            break;
+        case 'TiempoReal':
+            timeSimulationValues = {
+                'instruction': (variableSim.velocidad*1000),
+                'change': (variableSim.tiempoIntercambio*1000)
+            };
+            break;
+
+        case 'SinDelay':
+            timeSimulationValues = {
+                'instruction': 0,
+                'change': 0
+            };
+            break;
+    }    
+}
 
 // Agregar Proceso
 function addInstruction(){
@@ -52,6 +77,11 @@ function createProcess(value){
         valuePolite:0,
         waitingTime:0
     };
+}
+
+function removeProcesses(){
+    processes = [];
+    renderProcessParam();
 }
 
 function removeProcess(processID){
@@ -155,7 +185,9 @@ async function executeInstructions(){
     realTimeExecution += variableSim.velocidad;
     timeQuamtumCounter += variableSim.velocidad;
     renderVisualSimul();
-    await sleep(timeSimulationValues.instruction);
+    if(timeSimulationValues.instruction>0){
+        await sleep(timeSimulationValues.instruction);
+    }
 }
 
 async function ProcessChange(){

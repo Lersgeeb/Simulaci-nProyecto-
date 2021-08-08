@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
     <title>Document</title>
 </head>
 
@@ -18,8 +17,8 @@
             <div class="inputs-container">
                 <h1>Variables Simulación</h1>
                 <div class="inputs-yeah" ><span>Capacidad Maxima</span><input type="text" class="parameter" value="9" id="inputSimCapacidad"></div>
-                <div class="inputs-yeah" ><span>Tiempo por instruccion</span><input type="text" class="parameter" value="0.1" id="inputSimInstruccion"></div>
-                <div class="inputs-yeah" ><span>Tiempo de intercambio</span><input type="text" class="parameter" value="1" id="inputSimIntercambio"></div>
+                <div class="inputs-yeah" ><span>Tiempo por instruccion</span><input type="text" class="parameter" value="0.1" id="inputSimInstruccion" onchange="setTimeSimulation()"></div>
+                <div class="inputs-yeah" ><span>Tiempo de intercambio</span><input type="text" class="parameter" value="1" id="inputSimIntercambio" onchange="setTimeSimulation()"></div>
                 <div class="inputs-yeah" >
                     <span>Pol. Planificación</span><select name="" id="inputSimPolitica">
                         <option value="FCFS">FCFS</option>
@@ -37,8 +36,9 @@
                 <div class="add-process">
                     <label>Cantidad instrucciones</label><br>
                     <input type="number" class="parameter" id="add-process-input"> <br>
-                    <button onclick="addInstruction()">Agregar</button>
-                    <button onclick="addInstruction()">Agregar Procesos Aleatorios</button>
+                    <button class="mgt" onclick="addInstruction()">Agregar</button>
+                    <button class="mgt" onclick="addInstruction()">Agregar Procesos Aleatorios</button>
+                    <button class="mgt" onclick="removeProcesses()">Limpiar Procesos</button>
                 </div>
 
                 <div class="process-container-param" id="processParamsVisual">
@@ -49,13 +49,17 @@
 
         <div>
             <h1>Simulación visual</h1>
-            <div>
-                <button onclick="startSimulation()">Comenzar</button>
-                <span>Velocidad </span><select name="" id="">                    
-                    <option value="">Tiempo Real</option>
-                    <option value="">Acelerado</option>
-                    <option value="">Sin delay</option>
-                </select>
+            <div class="simulation-start-setup">
+                <div class="simlation-setup">
+                    <button onclick="startSimulation()">Comenzar</button>
+                    <div>
+                        <span>Velocidad </span><select name=""  id="timeExeSimulation" onchange="setTimeSimulation()">                    
+                            <option value="Acelerado">Acelerado</option>
+                            <option value="TiempoReal">Tiempo Real</option>
+                            <option value="SinDelay">Sin delay</option>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="visual-simulation">
 
@@ -97,5 +101,5 @@
 
 
 </body>
-
+<script src="script.js"></script>
 </html>

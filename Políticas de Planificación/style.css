@@ -19,7 +19,7 @@ button {
     background-color: var(--incentive-color);
     width: 11rem;
     height: 3rem;
-    margin-top: 1.5rem;
+    
 }
 
 button:hover {
@@ -63,14 +63,22 @@ select {
     justify-content: space-between;
 }
 
+.add-process{
+    display: flex;
+    flex-direction: column;
+}
+
 .add-process-container {
     display: flex;
     justify-content: space-between;
-    width: 32rem;
+    width: 30rem;
 }
 
 .add-process input {
     margin-top: 1rem;
+}
+.mgt{
+    margin-top: 1.5em;
 }
 
 
@@ -80,7 +88,7 @@ select {
     box-sizing: border-box;
     padding: 1em;
     width: 250px;
-    height: 500px;
+    height: 510px;
     background-color: var(--blue-complement);
     display: flex;
     flex-direction: column-reverse;
@@ -90,8 +98,8 @@ select {
 .process {
     margin-top: 10px;
     position: relative;
-    width: 220px;
-    height: 45px;
+    min-width: 220px;
+    min-height: 45px;
     background-color: #8ACEFB;
     border-radius: 10px;
     display: flex;
@@ -114,8 +122,8 @@ select {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 15px;
-    height: 15px;
+    width: 8%;
+    height: 40%;
     position: absolute;
     padding: 8px;
     border-radius: 100%;
@@ -143,6 +151,12 @@ select {
 
 
 /*cpu simulation*/
+.simlation-setup{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 
 .visual-simulation {
     display: flex;
