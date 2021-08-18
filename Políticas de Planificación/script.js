@@ -34,21 +34,24 @@ function setTimeSimulation(){
     switch(timeExeSimulation){
         case 'Acelerado':
             timeSimulationValues = {
-                'instruction': 100,
-                'change': 1200
+                'instruction': (variableSim.velocidad*100),
+                'change': (variableSim.tiempoIntercambio*100),
+                'visual':10
             };
             break;
         case 'TiempoReal':
             timeSimulationValues = {
                 'instruction': (variableSim.velocidad*1000),
-                'change': (variableSim.tiempoIntercambio*1000)
+                'change': (variableSim.tiempoIntercambio*1000),
+                'visual':100
             };
             break;
 
         case 'SinDelay':
             timeSimulationValues = {
                 'instruction': 0,
-                'change': 0
+                'change': 0,
+                'visual':0
             };
             break;
     }    
@@ -126,7 +129,7 @@ async function startSimulation(){
     calculateValues();
     renderVisualSimul();
     setStateSim('Execution');
-    
+    startCount();
     while(stateSim != 'Ready'){
 
         if(stateSim == 'Execution'){
@@ -165,6 +168,7 @@ async function runningExecution(){
             setStateSim('Change');        
         }
         else{
+            removeRealTime();
             renderResults();
             setCurrentProcess();
             setStateSim('Ready');
@@ -318,6 +322,7 @@ function renderResults(){
 //State 
 
 function setStateSim(state){
+    console.log(state);
     stateSim = state;
     changeTime();
     changeCpuIcon();
@@ -362,4 +367,53 @@ function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min); 
-  }
+}
+
+//tiempo de ejecucion
+var secondsLabel = null;
+var millisecondLabel = null;
+var totalSeconds = 0;
+var timeInterval = null;
+
+
+function renderTimeExecutionCounter(){
+    realTime = document.getElementById('realTime');
+    realTime.innerHTML = `
+        <h3>
+            <span>Tiempo de ejecucción:</span>
+            <label id="second">00</label>:<label id="millisecond">0</label>               
+        </h3>
+    `
+    secondsLabel = document.getElementById("second");
+    millisecondLabel = document.getElementById("millisecond");
+    totalSeconds = 0;
+    timeInterval = null;
+}
+
+function startCount(){
+    renderTimeExecutionCounter();
+    totalMilisecond = 0;
+    timeInterval = setInterval(setTime,timeSimulationValues.visual);    
+}
+
+function setTime() {
+    ++totalMilisecond;
+    millisecondLabel.innerHTML = totalMilisecond % 10;
+    secondsLabel.innerHTML = pad(parseInt(totalMilisecond / 10));
+}
+
+
+function pad(val) {
+    var valString = val + "";
+    if (valString.length < 2) {
+      return "0" + valString;
+    } else {
+      return valString;
+    }
+}
+
+function removeRealTime(){
+    clearInterval(timeInterval);
+    realTime = document.getElementById('realTime');
+    realTime.innerHTML = "";
+}
